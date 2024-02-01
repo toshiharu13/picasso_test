@@ -4,10 +4,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from api.serializers import FileRequestSerializer
 from api.models import File
+from api.tasks import processing_file
 import os
 
 
-class GetFile(APIView):
+class UploadFile(APIView):
 
     def post(self, request):
         text = {'file': None}
@@ -20,5 +21,11 @@ class GetFile(APIView):
             text = {
                 'uploaded_at': downloaded_file.uploaded_at,
                 'file_name': file_name,
-                'file_size(in bytes)': downloaded_file.file.size}
+                'file_size(in bytes)': downloaded_file.file.size
+            }
+            processing_file.delay(downloaded_file)
         return Response(text, status=201)
+
+
+class GetListFiles(APIView):
+    ...

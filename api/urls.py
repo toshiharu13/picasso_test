@@ -3,5 +3,6 @@ from api import views
 
 
 urlpatterns = [
-    path('upload/', views.GetFile.as_view(), name='get_file')
+    path('upload/', views.UploadFile.as_view(), name='upload_file'),
+    path('files/', views.GetListFiles.as_view(), name='get_list_files'),
 ]
