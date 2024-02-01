@@ -51,7 +51,7 @@ class GetListFiles(APIView):
         serializer = FileListSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
         cleaned_data = serializer.validated_data
-        if cleaned_data:
+        if cleaned_data['show_list']:
             queryset = File.objects.all()
             for file_object in queryset:
                 file_name = decode_file_name(file_object.file.name)

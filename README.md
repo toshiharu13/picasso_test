@@ -37,7 +37,15 @@ python manage.py createsuperuser
 ```shell
 python manage.py runserver
 ```
- - В отдельном терминале запуск celery worker(для мониторинга событий)
+ - В отдельном терминале запуск celery worker
 ```shell
 celery -A picasso_test worker
 ```
+## Запуск сервера через docker
+```shell
+docker-compose up
+```
+
+## API ручки
+ - api/v1/upload/, запросы - POST, обязательное поле - file
+ - api/v1/files/, запросы - GET, обязательный параметр - show_list(True/False)

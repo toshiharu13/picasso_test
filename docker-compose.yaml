@@ -1,0 +1,33 @@
+version: '3.8'
+volumes:
+    logs:
+
+services:
+   api:
+       build: .
+       command: bash -c "python manage.py runserver 0.0.0.0:8000"
+       ports:
+           - '8000:8000'
+       volumes:
+           - ../picasso_test:/code/
+       environment:
+           - CELERY_BROKER_URL=redis://redis:6379/0
+           - CELERY_RESULT_BACKEND=redis://redis:6379/0
+
+       depends_on:
+           - redis
+
+   celery:
+       build: .
+       command: celery -A picasso_test worker
+       volumes:
+           - ../picasso_test:/code/
+       environment:
+           - CELERY_BROKER_URL=redis://redis:6379/0
+           - CELERY_RESULT_BACKEND=redis://redis:6379/0
+       depends_on:
+           - api
+           - redis
+
+   redis:
+       image: redis:5-alpine
