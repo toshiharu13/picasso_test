@@ -1,17 +1,29 @@
-from django.db import transaction
-from django.shortcuts import render
-from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from api.serializers import FileRequestSerializer, FileListSerializer
 from api.models import File
 from api.tasks import processing_file
 import os
+from pathlib import Path
+import logging
+from logging.handlers import RotatingFileHandler
+
+
+log_folder = Path.cwd() / 'logs'
+Path(log_folder).mkdir(parents=True, exist_ok=True)
+strfmt = '[%(filename)s] [%(asctime)s] [%(levelname)s] > %(message)s'
+formatter = logging.Formatter(fmt=strfmt)
+logger = logging.getLogger('main_log')
+logger.setLevel(logging.INFO)
+handler = RotatingFileHandler(Path(log_folder) / 'actions.log', maxBytes=100000, backupCount=5)
+handler.setFormatter(formatter)
+logger.addHandler(handler)
 
 
 def decode_file_name(file_string):
     _, file_name = os.path.split(file_string)
     return file_name
+
 
 class UploadFile(APIView):
 

@@ -1,30 +1,37 @@
-# picasso_test
+# Тестовый API сервер
+Данный сервер в тестовом режиме загружает файлы и выдаёт информацию о загруженых файлах.
+
+[![Python](https://img.shields.io/badge/-Python-464646?style=flat-square&logo=Python)](https://www.python.org/)
+[![Django](https://img.shields.io/badge/-Django-464646?style=flat-square&logo=Django)](https://www.djangoproject.com/)
+![Celery Badge](https://img.shields.io/badge/Celery-37814A?logo=celery&logoColor=fff&style=flat-square)
 
 ## Установка
- - склонировать проект
- - создать виртуальную среду и войдите в неё
+ - Скачайте код
+ - Создайте и активируйте виртуальное окружение
 ```shell
-python -m venv venv
-source venv/bin/activate
+python -m venv env && source env/bin/activate
 ```
- - обновиь pip
+ - Обновите pip
 ```shell
 pip install --upgrade pip
 ```
- - установить необходимые библиотеки из файла зависимостей
+ - Установите необходимые библиотеки из файла зависимостей
 ```shell
 pip install -r requirements.txt
 ```
- - установить redis
+ - Установите redis
 ```shell
-sudo apt update
+sudo apt update 
 sudo apt install redis
 ```
- - Произвести миграцию
+ - Примените миграции
 ```shell
 python manage.py migrate
 ```
-
+ - Создайте учётную запись администратора командой:
+```shell
+python manage.py createsuperuser
+```
 ## Запуск сервера
 - Запуск Django
 ```shell
