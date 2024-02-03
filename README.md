@@ -37,11 +37,20 @@ python manage.py createsuperuser
 ```shell
 python manage.py runserver
 ```
- - В отдельном терминале запуск celery worker
+ - Убедитесь, что redis сервер запущен, если нет, запустите его в отдельглм окне
+```shell
+redis-server
+```
+ - В отдельном терминале запустите celery worker
 ```shell
 celery -A picasso_test worker
 ```
 ## Запуск сервера через docker
+ - Убедитесь, что у вас установлен docker + docker-compose. Установите в случае отсутствия, к примеру Docker Desktop
+```html
+https://docs.docker.com/desktop/
+```
+ - Запустите контейнеры:
 ```shell
 docker-compose up
 ```
