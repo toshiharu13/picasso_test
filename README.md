@@ -56,5 +56,15 @@ docker-compose up
 ```
 
 ## API ручки
- - api/v1/upload/, запросы - POST, обязательное поле - file
- - api/v1/files/, запросы - GET, обязательный параметр - show_list(True/False)
+ - Запросы - POST, обязательное поле - file
+```
+http://127.0.0.1:8000/api/v1/upload/
+```
+ - Запросы - GET, обязательный параметр - show_list(True/False)
+```
+http://127.0.0.1:8000/api/v1/files/
+```
+ - Swager страница
+```
+http://127.0.0.1:8000/docs/
+```
